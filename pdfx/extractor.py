@@ -22,6 +22,10 @@ DOI_REGEX = r"""DOI:\s?([^\s,]+)"""
 # URL
 URL_REGEX = r"(https)([-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+)(\n)([-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+\n)*"
 
+ARXIV_REGEX = URL_REGEX
+ARXIV_REGEX2 = URL_REGEX
+DOI_REGEX = URL_REGEX
+
 
 def extract_urls(text):
     """
