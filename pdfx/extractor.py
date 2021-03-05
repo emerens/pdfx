@@ -30,6 +30,7 @@ def extract_urls(text):
     """
     # pdfファイルから抽出した全てのURL
     url_list = re.findall(URL_REGEX, text, re.IGNORECASE)
+    url_list = [url[0] + url[1] for url in url_list]
 
     print(url_list)
 
