@@ -24,6 +24,7 @@ URL_REGEX = r"""(?i)\b((?:https?:(?:/{1,3}|[a-z0-9%])|[a-z0-9.\-]+[.](?:com|net|
 
 
 def extract_urls(text):
+    print(text)
     matches = re.findall(URL_REGEX, text, re.IGNORECASE)
 
     print(matches)
