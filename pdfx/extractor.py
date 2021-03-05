@@ -27,7 +27,10 @@ def extract_urls(text):
     """
     LiA用に改変
     """
-    url_list = re.findall(URL_REGEX, text, re.IGNORECASE)
+    print('*' * 10)
+    print(text)
+    print('*' * 10)
+    url_list = re.findall(URL_REGEX, text)
     url_list = [url[0] + url[1] for url in url_list]
 
     return set(url_list)
