@@ -9,7 +9,7 @@ import re
 URL_REGEX = r"(https)([\-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+\n)"
 
 
-def extract_urls(text, URL_REGEX):
+def extract_urls(text):
     """
     ツール用に改変
     """
