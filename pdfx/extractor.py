@@ -30,13 +30,19 @@ def extract_urls(text):
     # pdfファイルから抽出した全てのURL
     url_list = re.findall(URL_REGEX, text, re.IGNORECASE)
 
+    print(url_list)
+
     # 削除対象のURL
     # クエリパラメータが付いたURLは、クエリパラメータ前のURLとクエリパラメータが付いた完全なURLとに分かれてしまう
     # クエリパラメータの情報がついていない不完全なURLは削除する
     delete_url = [url.split('?')[0] for url in url_list if '?' in url]
 
+    print(delete_url)
+
     # url_listから削除対象のURLを除く
     url_list = [url for url in url_list if url not in delete_url]
+
+    print(url_list)
 
     return set(url_list)
 
