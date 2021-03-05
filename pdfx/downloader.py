@@ -40,9 +40,7 @@ def sanitize_url(url):
 
 
 def get_status_code(url):
-    """
-    Perform HEAD request and return status code
-    """
+    """ Perform HEAD request and return status code """
     try:
         request = Request(sanitize_url(url))
         request.add_header("User-Agent", "Mozilla/5.0 (compatible; MSIE 9.0; "
@@ -54,7 +52,7 @@ def get_status_code(url):
     except HTTPError as e:
         return e.code
     except URLError as e:
-        return e.code
+        return e.reason
     except Exception as e:
         print(e, url)
         return None
