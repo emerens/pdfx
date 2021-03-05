@@ -6,7 +6,7 @@ from __future__ import (absolute_import, division, print_function,
 import re
 
 # ツール用に改変
-URL_REGEX = r"(https)([\-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+\n)([\-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+\n)*"
+URL_REGEX = r"(https)([\-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+\n)([\-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+\n)*([\-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+)*"
 
 
 def extract_urls(text):
