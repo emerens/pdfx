@@ -20,7 +20,7 @@ ARXIV_REGEX2 = r"""arxiv.org/abs/([^\s,]+)"""
 DOI_REGEX = r"""DOI:\s?([^\s,]+)"""
 
 # URL
-URL_REGEX = r"(https?|ftp)(:\/\/[-_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+)"
+URL_REGEX = r"(https?|ftp)(:\/\/[-_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#\s]+)"
 
 
 def extract_urls(text):
