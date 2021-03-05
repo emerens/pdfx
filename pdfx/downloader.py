@@ -3,6 +3,7 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 import os
 import sys
+
 IS_PY2 = sys.version_info < (3, 0)
 
 if IS_PY2:
@@ -11,6 +12,7 @@ if IS_PY2:
 else:
     # Python 3
     from urllib.request import Request, urlopen, HTTPError, URLError
+
     unicode = str
 
 import ssl
@@ -38,19 +40,22 @@ def sanitize_url(url):
 
 
 def get_status_code(url):
-    """ Perform HEAD request and return status code """
+    """
+    Perform HEAD request and return status code
+    ツール用に一部変更
+    """
     try:
         request = Request(sanitize_url(url))
         request.add_header("User-Agent", "Mozilla/5.0 (compatible; MSIE 9.0; "
-                           "Windows NT 6.1; Trident/5.0)")
+                                         "Windows NT 6.1; Trident/5.0)")
         request.get_method = lambda: 'HEAD'
         response = urlopen(request, context=ssl_unverified_context)
         # print response.info()
         return response.getcode()
     except HTTPError as e:
-        return e.code
+        return e.code.replace('[', '').replace(']', '')  # 変更
     except URLError as e:
-        return e.reason
+        return e.reason.replace('[', '').replace(']', '')  # 変更
     except Exception as e:
         print(e, url)
         return None
@@ -113,16 +118,16 @@ def download_urls(urls, output_directory, verbose=True,
             with open(fn_download, "wb") as f:
                 request = Request(sanitize_url(url))
                 request.add_header("User-Agent", "Mozilla/5.0 (compatible; "
-                                   "MSIE 9.0; Windows NT 6.1; Trident/5.0)")
+                                                 "MSIE 9.0; Windows NT 6.1; Trident/5.0)")
                 response = urlopen(request, context=ssl_unverified_context)
                 status_code = response.getcode()
                 if status_code == 200:
                     f.write(urlopen(request).read())
                     colorprint(OKGREEN, "Downloaded '%s' to '%s'" %
-                                        (url, fn_download))
+                               (url, fn_download))
                 else:
                     colorprint(FAIL, "Error downloading '%s' (%s)" %
-                                     (url, status_code))
+                               (url, status_code))
         except HTTPError as e:
             colorprint(FAIL, "Error downloading '%s' (%s)" % (url, e.code))
         except URLError as e:
