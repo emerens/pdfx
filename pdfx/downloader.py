@@ -53,9 +53,9 @@ def get_status_code(url):
         # print response.info()
         return response.getcode()
     except HTTPError as e:
-        return e.code.replace('[', '').replace(']', '')  # 変更
+        return str(e.code).replace('[', '').replace(']', '')  # 変更
     except URLError as e:
-        return e.reason.replace('[', '').replace(']', '')  # 変更
+        return str(e.code).replace('[', '').replace(']', '')  # 変更
     except Exception as e:
         print(e, url)
         return None
