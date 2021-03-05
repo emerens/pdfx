@@ -24,15 +24,21 @@ URL_REGEX = r"""(?i)\b((?:https?:(?:/{1,3}|[a-z0-9%])|[a-z0-9.\-]+[.](?:com|net|
 
 
 def extract_urls(text):
-    print(text)
-    matches = re.findall(URL_REGEX, text, re.IGNORECASE)
+    """
+    LiA用に改変
+    """
+    # pdfファイルから抽出した全てのURL
+    url_list = re.findall(URL_REGEX, text, re.IGNORECASE)
 
-    print(matches)
+    # 削除対象のURL
+    # クエリパラメータが付いたURLは、クエリパラメータ前のURLとクエリパラメータが付いた完全なURLとに分かれてしまう
+    # クエリパラメータの情報がついていない不完全なURLは削除する
+    delete_url = [url.split('?')[0] for url in url_list if '?' in url]
 
-    if len(matches) == 0:
-        return set(matches)
-    else:
-        return set(matches[-1])
+    # url_listから削除対象のURLを除く
+    url_list = [url for url in url_list if url not in delete_url]
+
+    return set(url_list)
 
 
 def extract_arxiv(text):
