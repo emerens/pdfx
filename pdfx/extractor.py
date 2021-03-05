@@ -12,24 +12,16 @@ from __future__ import (absolute_import, division, print_function,
 
 import re
 
-# arXiv.org
-ARXIV_REGEX = r"""arxiv:\s?([^\s,]+)"""
-ARXIV_REGEX2 = r"""arxiv.org/abs/([^\s,]+)"""
-
-# DOI
-DOI_REGEX = r"""DOI:\s?([^\s,]+)"""
-
-# URL
+# ツール用に改変
+ARXIV_REGEX = r"(https)([-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+)(\n)([-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+\n)*"
+ARXIV_REGEX2 = r"(https)([-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+)(\n)([-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+\n)*"
+DOI_REGEX = r"(https)([-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+)(\n)([-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+\n)*"
 URL_REGEX = r"(https)([-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+)(\n)([-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+\n)*"
-
-ARXIV_REGEX = URL_REGEX
-ARXIV_REGEX2 = URL_REGEX
-DOI_REGEX = URL_REGEX
 
 
 def extract_urls(text):
     """
-    LiA用に改変
+    ツール用に改変
     """
     url_list = re.findall(URL_REGEX, text)
     url_list = [''.join(url).replace('\n', '') for url in url_list]
@@ -37,15 +29,21 @@ def extract_urls(text):
 
 
 def extract_arxiv(text):
-    res = re.findall(ARXIV_REGEX, text, re.IGNORECASE) + \
-          re.findall(ARXIV_REGEX2, text, re.IGNORECASE)
-    # return set([r.strip(".") for r in res])
-    return extract_urls(text)
+    """
+    ツール用に改変
+    """
+    url_list = re.findall(URL_REGEX, text)
+    url_list = [''.join(url).replace('\n', '') for url in url_list]
+    return set(url_list)
 
 
 def extract_doi(text):
-    res = set(re.findall(DOI_REGEX, text, re.IGNORECASE))
-    return set([r.strip(".") for r in res])
+    """
+    ツール用に改変
+    """
+    url_list = re.findall(URL_REGEX, text)
+    url_list = [''.join(url).replace('\n', '') for url in url_list]
+    return set(url_list)
 
 
 if __name__ == "__main__":
