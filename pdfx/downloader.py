@@ -42,7 +42,6 @@ def sanitize_url(url):
 def get_status_code(url):
     """
     Perform HEAD request and return status code
-    ツール用に一部変更
     """
     try:
         request = Request(sanitize_url(url))
@@ -53,9 +52,9 @@ def get_status_code(url):
         # print response.info()
         return response.getcode()
     except HTTPError as e:
-        return str(e.code).replace('[', '').replace(']', '')  # 変更
+        return e.code
     except URLError as e:
-        return str(e.code).replace('[', '').replace(']', '')  # 変更
+        return e.code
     except Exception as e:
         print(e, url)
         return None
