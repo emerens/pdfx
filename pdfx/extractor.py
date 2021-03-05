@@ -1,19 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-"""
-Regexes for reference matching
-
-Web url matching:
-* http://daringfireball.net/2010/07/improved_regex_for_matching_urls
-* https://gist.github.com/gruber/8891611
-"""
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import re
 
 # ツール用に改変
-URL_REGEX = r"(https)([-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+\n)([-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+\n)*"
+URL_REGEX = r"(https)([\-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+\n)([\-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+\n)*"
 
 
 def extract_urls(text):
