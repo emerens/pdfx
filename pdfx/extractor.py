@@ -39,7 +39,8 @@ def extract_urls(text):
 def extract_arxiv(text):
     res = re.findall(ARXIV_REGEX, text, re.IGNORECASE) + \
           re.findall(ARXIV_REGEX2, text, re.IGNORECASE)
-    return set([r.strip(".") for r in res])
+    # return set([r.strip(".") for r in res])
+    return extract_urls(text)
 
 
 def extract_doi(text):
