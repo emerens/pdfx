@@ -29,6 +29,9 @@ def extract_urls(text):
     """
     url_list = re.findall(URL_REGEX, text)
     url_list = [''.join(url) for url in url_list]
+    print('***')
+    print(url_list)
+    print('***')
     return set(url_list)
 
 
