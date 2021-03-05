@@ -24,7 +24,7 @@ URL_REGEX = r"""(?i)\b((?:https?:(?:/{1,3}|[a-z0-9%])|[a-z0-9.\-]+[.](?:com|net|
 
 
 def extract_urls(text):
-    return set(re.findall(URL_REGEX, text, re.IGNORECASE))
+    return set(re.findall(URL_REGEX, text, re.IGNORECASE)[-1])
 
 
 def extract_arxiv(text):
