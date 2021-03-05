@@ -20,6 +20,7 @@ from .libs.xmp import xmp_to_dict
 # Setting `psparser.STRICT` is the first thing to do because it is
 # referenced in the other pdfparser modules
 from pdfminer import settings as pdfminer_settings
+
 pdfminer_settings.STRICT = False
 from pdfminer import psparser
 from pdfminer.pdfdocument import PDFDocument
@@ -30,9 +31,7 @@ from pdfminer.pdftypes import resolve1, PDFObjRef
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 
-
 logger = logging.getLogger(__name__)
-
 
 IS_PY2 = sys.version_info < (3, 0)
 if not IS_PY2:
@@ -232,7 +231,7 @@ class PDFMinerBackend(ReaderBackend):
                         self.references.add(refs)
 
             # except Exception as e:
-                # logger.warning(str(e))
+            # logger.warning(str(e))
 
         # Remove empty metadata entries
         self.metadata_cleanup()
