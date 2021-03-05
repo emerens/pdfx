@@ -20,19 +20,15 @@ ARXIV_REGEX2 = r"""arxiv.org/abs/([^\s,]+)"""
 DOI_REGEX = r"""DOI:\s?([^\s,]+)"""
 
 # URL
-URL_REGEX = r"(https?|ftp)(:\/\/[-_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#\n]+)"
+URL_REGEX = r"(https)([-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+)(\n)([-:_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+$,%#]+\n)*"
 
 
 def extract_urls(text):
     """
     LiA用に改変
     """
-    print('*' * 10)
-    print(text)
-    print('*' * 10)
     url_list = re.findall(URL_REGEX, text)
-    url_list = [url[0] + url[1] for url in url_list]
-
+    url_list = [''.join(url) for url in url_list]
     return set(url_list)
 
 
