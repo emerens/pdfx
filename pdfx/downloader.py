@@ -47,14 +47,12 @@ def get_status_code(url):
                                          "Windows NT 6.1; Trident/5.0)")
         request.get_method = lambda: 'HEAD'
         response = urlopen(request, context=ssl_unverified_context)
-        # print response.info()
         return response.getcode()
     except HTTPError as e:
         return e.code
     except URLError as e:
         return e.reason
     except Exception as e:
-        print(e, url)
         return None
 
 

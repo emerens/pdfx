@@ -3,6 +3,7 @@ Inspired by http://stackoverflow.com/a/7257510
 """
 
 import sys
+
 IS_PY2 = sys.version_info < (3, 0)
 
 if IS_PY2:
@@ -17,6 +18,7 @@ from threading import Thread
 
 class Worker(Thread):
     """ Thread executing tasks from a given tasks queue """
+
     def __init__(self, tasks):
         Thread.__init__(self)
         self.tasks = tasks
@@ -36,6 +38,7 @@ class Worker(Thread):
 
 class ThreadPool:
     """ Pool of threads consuming tasks from a queue """
+
     def __init__(self, num_threads):
         self.tasks = Queue(num_threads)
         for _ in range(num_threads):
@@ -61,9 +64,11 @@ if __name__ == "__main__":
 
     delays = [randrange(5, 10) for i in range(100)]
 
+
     def wait_delay(d):
         print("sleeping for (%d)sec" % d)
         sleep(d)
+
 
     pool = ThreadPool(5)
 

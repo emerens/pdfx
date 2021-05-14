@@ -187,7 +187,6 @@ class PDFMinerBackend(ReaderBackend):
         if doc.info:
             for k in doc.info[0]:
                 v = doc.info[0][k]
-                # print(repr(v), type(v))
                 if isinstance(v, (bytes, str, unicode)):
                     self.metadata[k] = make_compat_str(v)
                 elif isinstance(v, (psparser.PSLiteral, psparser.PSKeyword)):
@@ -196,10 +195,7 @@ class PDFMinerBackend(ReaderBackend):
         # Secret Metadata
         if 'Metadata' in doc.catalog:
             metadata = resolve1(doc.catalog['Metadata']).get_data()
-            # print(metadata)  # The raw XMP metadata
-            # print(xmp_to_dict(metadata))
             self.metadata.update(xmp_to_dict(metadata))
-            # print("---")
 
         # Extract Content
         text_io = BytesIO()
@@ -240,7 +236,6 @@ class PDFMinerBackend(ReaderBackend):
         self.text = text_io.getvalue().decode("utf-8")
         text_io.close()
         converter.close()
-        # print(self.text)
 
         # Extract URL references from text
         for url in extractor.extract_urls(self.text):
@@ -260,13 +255,10 @@ class PDFMinerBackend(ReaderBackend):
         if isinstance(obj_ref, list):
             return [self.resolve_PDFObjRef(item) for item in obj_ref]
 
-        # print(">", obj_ref, type(obj_ref))
         if not isinstance(obj_ref, PDFObjRef):
-            # print("type not of PDFObjRef")
             return None
 
         obj_resolved = obj_ref.resolve()
-        # print("obj_resolved:", obj_resolved, type(obj_resolved))
         if isinstance(obj_resolved, bytes):
             obj_resolved = obj_resolved.decode("utf-8")
 
@@ -289,7 +281,6 @@ class PDFMinerBackend(ReaderBackend):
                 return self.resolve_PDFObjRef(obj_resolved["A"])
 
             if "URI" in obj_resolved["A"]:
-                # print("->", a["A"]["URI"])
                 return Reference(obj_resolved["A"]["URI"].decode("utf-8"),
                                  self.curpage)
 

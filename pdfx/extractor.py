@@ -43,7 +43,3 @@ def extract_doi(text):
         urls = re.findall(URL_REGEX, text)
         url_list += [''.join(url).replace('\n', '') for url in urls]
     return set(url_list)
-
-
-if __name__ == "__main__":
-    print(extract_arxiv("arxiv:123 . arxiv: 345 455 http://arxiv.org/abs/876"))
